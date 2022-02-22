@@ -1,0 +1,55 @@
+<%@ page import="java.util.*"%>
+<%@ page import="metier.JeuPileOuFace"%>
+
+<html>
+<body>
+	<h2>Pile ou Face</h2>
+
+	<p>Le premier arrivé à 10 à gagné !</p>
+	<br>
+	<p>Deux faces identiques je gagne, deux faces diffèrentes vous
+		gagnez !</p>
+	<br>
+	<br>
+<%
+JeuPileOuFace jeu = new JeuPileOuFace();
+jeu.init();
+	if (request.getParameter("coup") == null) {
+%>
+	<p> Nous allons débuter une nouvelle partie</p>
+	<br>
+	<p>
+	Score <%=jeu.getPointsHumain()%> à <%=jeu.getPointsOrdi()%>
+	<p>
+		<br>
+		<br>
+		<p>
+		Vous jouez <a href="jeu.jsp?coup=P">Pile</a> ou <a
+			href="jeu.jsp?coup=F">Face</a></p>
+	
+<%
+	}else if(request.getParameter("coup")!=null){
+		String o;
+		o = request.getParameter("coup");
+		char valeur = o.charAt(0);
+		jeu.play(valeur);
+		
+%>
+	<p>Vous venez de jouer <%=jeu.getLastHumain() %> et l'ordi <%=jeu.getLastOrdi() %></p>
+	<p>
+	Score <%=jeu.getPointsHumain()%> à <%=jeu.getPointsOrdi()%>
+	</p>
+		<br>
+		<br>
+		<p>
+		Vous jouez <a href="jeu.jsp?coup=P">Pile</a> ou <a
+			href="jeu.jsp?coup=F">Face</a></p>
+<%
+		
+	}
+
+%>
+
+
+</body>
+</html>
